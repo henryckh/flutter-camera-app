@@ -1,18 +1,26 @@
+import 'package:camera_platform_interface/src/types/camera_description.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:henryckh/screens/camera.dart';
 import './otherpage.dart';
 
 class HomePage extends StatefulWidget {
+  HomePage(this.cameras);
+  final List<CameraDescription> cameras;
+
   @override
   State<StatefulWidget> createState() {
-    return _HomePage();
+    return _HomePage(cameras);
   }
 }
 
 class _HomePage extends State<HomePage> {
+  final List<CameraDescription> cameras;
   String mainProfilePic =
       "https://avatars.githubusercontent.com/u/11421035?v=4";
   String otherProfilePic = "";
+
+  _HomePage(this.cameras);
 
   @override
   Widget build(BuildContext context) {
@@ -79,11 +87,11 @@ class _HomePage extends State<HomePage> {
                 }),
             ListTile(
                 title: Text("Camera Page"),
-                trailing: Icon(Icons.security),
+                trailing: Icon(Icons.camera),
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(new MaterialPageRoute(
-                    builder: (BuildContext context) => OtherPage("Camera Page"),
+                    builder: (BuildContext context) => CameraApp(cameras),
                   ));
                 }),
             Divider(
